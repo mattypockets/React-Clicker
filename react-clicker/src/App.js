@@ -9,12 +9,30 @@ class App extends Component {
   state = {
     heroes,
     currentScore: 0,
-    highScore: 0
+    highScore: 0,
+    clickedHeroes: []
   }
 
-  heroChoice = id => {
-
+  clickedHero = (id) => {
+    // If the hero has already been chosen, reset game
+    if (this.state.clickedHeroes.includes(id)){
+      this.setState({currentScore: 0, clickedHeroes: []})
+    } 
+      // If the hero hasn't been clicked yet, increase score and add that hero to the clickedHeroes array
+      else {
+      this.setState({currentScore: this.state.currentScore + 1})
+      this.setState({clickedHeroes: [...this.setState.clickedHeroes, id]})
+      // Set high score to equal the highest score
+      if (this.state.currentScore > this.state.highScore) { 
+        this.setState({highScore: this.state.currentScore + 1})}
+    }
   }
+
+  shuffleCards = () => {
+    console.log("Shuffled")
+  }
+
+
 
   render() {
     return (
